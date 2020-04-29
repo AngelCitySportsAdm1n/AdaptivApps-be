@@ -13,7 +13,7 @@ const { AuthenticationError } = require('apollo-server');
  * @returns { Promise }
  */
 const profile = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
@@ -32,7 +32,7 @@ const profile = async (_, args, context) => {
  * @returns { Promise }
  */
 const profiles = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
@@ -53,14 +53,14 @@ const profiles = async (_, args, context) => {
  * @returns { Promise }
  */
 const event = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
   }
   context.logger.debug('Query.event: %O', currentUser);
 
-  // Returns all profiles
+  // Finding an event based on args specification
   const event = await context.prisma.event(args.where);
   return event;
 };
@@ -71,14 +71,14 @@ const event = async (_, args, context) => {
  * @returns { Promise }
  */
 const events = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
   }
   context.logger.debug('Query.events: %O', currentUser);
 
-  // Returns all profiles
+  // Returns all events
   const event = await context.prisma.events(args);
 
   return event;
@@ -92,14 +92,14 @@ const events = async (_, args, context) => {
  * @returns { Promise }
  */
 const activity = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
   }
   context.logger.debug('Query.activity: %O', currentUser);
 
-  // Returns all profiles
+  // Finding an activity based on args specification
   const activity = await context.prisma.activity(args.where);
 
   return activity;
@@ -111,14 +111,14 @@ const activity = async (_, args, context) => {
  * @returns { Promise }
  */
 const activities = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
   }
   context.logger.debug('Query.activities: %O', currentUser);
 
-  // Returns all profiles
+  // Returns all activities
   const activity = await context.prisma.activities(args);
 
   return activity;
@@ -132,14 +132,14 @@ const activities = async (_, args, context) => {
  * @returns { Promise }
  */
 const participant = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
   }
   context.logger.debug('Query.participant: %O', currentUser);
 
-  // Returns all profiles
+  // Finding the participant based on args specification
   const participant = await context.prisma.participant(args.where);
 
   return participant;
@@ -151,17 +151,57 @@ const participant = async (_, args, context) => {
  * @returns { Promise }
  */
 const participants = async (_, args, context) => {
-  const currentUser = context.user;
+  const currentUser = await context.user;
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user');
     throw new AuthenticationError('Must be authenticated');
   }
   context.logger.debug('Query.participants: %O', currentUser);
 
-  // Returns all profiles
+  // Returns all participants
   const participant = await context.prisma.participants(args);
 
   return participant;
+};
+
+// --------------------------------------------------------------------- Chat Query ---------------------------------------------------------------------
+
+/**
+ * @param {{ where: import('../generated/prisma-client').ChatWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const chats = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.chats: %O', currentUser);
+
+  // Returns all chats
+  const chats = await context.prisma.chats(args);
+
+  return chats;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').ChatRoomWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const chatRooms = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.chatRooms: %O', currentUser);
+
+  // Returns all chat rooms
+  const chatRooms = await context.prisma.chatRooms(args);
+
+  return chatRooms;
 };
 
 module.exports = {
@@ -173,4 +213,6 @@ module.exports = {
   activities,
   participants,
   participant,
+  chats,
+  chatRooms,
 };
