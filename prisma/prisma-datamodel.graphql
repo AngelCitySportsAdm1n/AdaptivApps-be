@@ -1,6 +1,8 @@
 type Profile @key(fields: "email") {
   id: ID! @id
   email: String! @unique
+  type: String
+  private: Boolean @default(value: true)
   firstName: String
   lastName: String
   displayName: String
@@ -10,50 +12,163 @@ type Profile @key(fields: "email") {
   legal: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  events: [Event]! @relation(name: "Events")
+  events: [Participant]! @relation(name: "Event")
   activities: [Participant]! @relation(name: "Profile")
-  chats: [Chat] @relation(name: "SentMessages" onDelete: CASCADE)
-  receivedChats: [Chat] @relation(name: "ReceivedMessages" onDelete: CASCADE)
-  chatRooms: [ChatRoom] @relation(name: "ChatRooms" onDelete: CASCADE)
+  extProfile: ExtendedProfile @relation(name: "ExtendedProfile")
+  chats: [Chat] @relation(name: "SentMessages", onDelete: CASCADE)
+  receivedChats: [Chat] @relation(name: "ReceivedMessages", onDelete: CASCADE)
+  chatRooms: [ChatRoom] @relation(name: "ChatRooms", onDelete: CASCADE)
+}
+type ExtendedProfile {
+  id: ID! @id
+  private: Boolean @default(value: true)
+  website: String
+  orgName: String
+  disability: Disabilities @relation(name: "Disability")
+  phoneNumber: String
+  gender: String
+  state: String
+  city: String
+  adaptivSportsParticipantion: Boolean @default(value: false)
+  acsParticipantion: Boolean @default(value: false)
+  eC1Name: String
+  eC1Relation: String
+  eC1Phone: String
+  eC2Name: String
+  eC2Relation: String
+  eC2Phone: String
+  militaryBranch: MilitaryBranch @relation(name: "Branch")
+  mobility: MobilityStatus @relation(name: "Mobility")
+}
+type MobilityStatus {
+  id: ID! @id
+  private: Boolean @default(value: true)
+  walkIndependently: Boolean @default(value: false)
+  assistiveDevice: Boolean @default(value: false)
+  manualWheelchair: Boolean @default(value: false)
+  powerChair: Boolean @default(value: false)
+}
+type MilitaryBranch {
+  id: ID! @id
+  private: Boolean @default(value: true)
+  army: Boolean @default(value: false)
+  navy: Boolean @default(value: false)
+  marineCorps: Boolean @default(value: false)
+  coastGuard: Boolean @default(value: false)
+  foreignMilitary: Boolean @default(value: false)
 }
 
 type Event {
   id: ID! @id
   type: String!
+  sportType: String!
+  tags: String!
   title: String!
-  host: String
+  host: Host! @relation(link: TABLE)
+  coaches: [Coach]! @relation(link: TABLE)
   speakers: String
-  startDate: String!
-  endDate: String!
+  date: [String]! @scalarList(strategy: RELATION)
   startTime: String
+  endTime: String
   location: String!
   link: String
-  sponsors: String
+  sponsors: String!
   imgUrl: String
   details: String
-  activities: [Activity]! @relation(name: "Activity", onDelete: CASCADE)
-  attendees: [Profile]! @relation(name: "Events")
+  activities: [Activity]! @relation(name: "Activities", onDelete: CASCADE)
+  attendees: [Participant]! @relation(name: "Attendees")
 }
 
 type Activity {
   id: ID! @id
   name: String!
-  startDate: String!
-  location: String
+  type: String!
+  sportType: String!
+  date: [String]! @scalarList(strategy: RELATION)
+  location: String!
   link: String
   startTime: String!
   endTime: String
-  type: String
   details: String
-  event: Event! @relation(name: "Activity")
+  event: Event! @relation(name: "Activities")
   participants: [Participant]! @relation(name: "Participant", onDelete: CASCADE)
 }
 
 type Participant {
   id: ID! @id
-  activity: Activity! @relation(name: "Participant")
-  profile: Profile @relation(name: "Profile")
-  role: Role @relation(name: "Role", onDelete: CASCADE)
+  event: Event! @relation(name: "Attendees")
+  activity: Activity @relation(name: "Participant")
+  profile: Profile! @relation(name: "Profile")
+  role: Role! @relation(name: "Role", onDelete: CASCADE)
+}
+type Sport {
+  id: ID! @id
+  participant: Participant! @relation(name: "Athlete")
+  sport: SportMeta @relation(name: "Sport")
+  response: String
+}
+type SportMeta {
+  id: ID! @id
+  name: String!
+  question: String!
+  options: [String]! @scalarList(strategy: RELATION)
+}
+
+type Host {
+  id: ID! @id
+  profile: Profile!
+}
+
+type Coach {
+  id: ID! @id
+  profile: Profile!
+}
+
+type Disabilities {
+  id: ID! @id
+  private: Boolean @default(value: true)
+  detailedDisabilities: DetailedDisabilities @relation(link: TABLE)
+  ataxia: Boolean @default(value: false)
+  hearingImpairment: Boolean @default(value: false)
+  hypertonia: Boolean @default(value: false)
+  impairedMusclePower: Boolean @default(value: false)
+  impairedPassiveRange: Boolean @default(value: false)
+  intellectualImpairment: Boolean @default(value: false)
+  legLengthDiff: Boolean @default(value: false)
+  limbDeficiency: Boolean @default(value: false)
+  shortStature: Boolean @default(value: false)
+  visionImpairment: Boolean @default(value: false)
+  none: Boolean @default(value: false)
+}
+
+type DetailedDisabilities {
+  id: ID! @id
+  ALS: Boolean @default(value: false)
+  amputation: Boolean @default(value: false)
+  arthogryposis: Boolean @default(value: false)
+  brachialPlexusInjury: Boolean @default(value: false)
+  caudaEquinaSyndrome: Boolean @default(value: false)
+  cerebralPalsy: Boolean @default(value: false)
+  arthritis: Boolean @default(value: false)
+  charcotMarieTooth: Boolean @default(value: false)
+  dropFoot: Boolean @default(value: false)
+  dwarfism: Boolean @default(value: false)
+  ehlersDanlosSyndrome: Boolean @default(value: false)
+  fibromyalgia: Boolean @default(value: false)
+  guillainBarreSyndrome: Boolean @default(value: false)
+  multipleSclerosis: Boolean @default(value: false)
+  muscularDystrophy: Boolean @default(value: false)
+  osteogenesisImperfecta: Boolean @default(value: false)
+  osteoporosis: Boolean @default(value: false)
+  parkinsons: Boolean @default(value: false)
+  polio: Boolean @default(value: false)
+  praderWilliSyndrome: Boolean @default(value: false)
+  spinaBifida: Boolean @default(value: false)
+  paraplegia: Boolean @default(value: false)
+  quadraplegia: Boolean @default(value: false)
+  tbi: Boolean @default(value: false)
+  other: Boolean @default(value: false)
+  none: Boolean @default(value: false)
 }
 
 type Chat {
