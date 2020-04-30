@@ -10,6 +10,12 @@
 # import Query.militaryBranch from "generated/prisma.graphql"
 # import Query.militaryBranches from "generated/prisma.graphql"
 
+# import Query.sport from "generated/prisma.graphql"
+# import Query.sports from "generated/prisma.graphql"
+
+# import Query.sportMeta from "generated/prisma.graphql"
+# import Query.sportMetas from "generated/prisma.graphql"
+
 # import Query.event from "generated/prisma.graphql"
 # import Query.events from "generated/prisma.graphql"
 

@@ -159,6 +159,83 @@ const militaryBranches = async (_, args, context) => {
   return militaryBranch;
 };
 
+// --------------------------------------------------------------------- Sport Query ---------------------------------------------------------------------
+
+/**
+ * @param {{ where: import('../generated/prisma-client').SportWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const sport = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.sport: %O', currentUser);
+
+  // Finding a sport based on args specification
+  const sport = await context.prisma.sport(args.where);
+  return sport;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').SportWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const sports = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.sports: %O', currentUser);
+
+  // Finding a sport based on args specification
+  const sport = await context.prisma.sports(args);
+  return sport;
+};
+
+// --------------------------------------------------------------------- Sport Meta Query ---------------------------------------------------------------------
+
+/**
+ * @param {{ where: import('../generated/prisma-client').SportMetaWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const sportMeta = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.sportMeta: %O', currentUser);
+
+  // Finding a sport meta based on args specification
+  const sportMeta = await context.prisma.sportMeta(args.where);
+  return sportMeta;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').SportMetaWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const sportMetas = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.sportMetas: %O', currentUser);
+
+  // Finding a sport metas based on args specification
+  const sportMeta = await context.prisma.sportMetas(args);
+  return sportMeta;
+};
+
+
 // --------------------------------------------------------------------- Event Query ---------------------------------------------------------------------
 
 /**
@@ -327,6 +404,10 @@ module.exports = {
   mobilityStatuses,
   militaryBranch,
   militaryBranches,
+  sport,
+  sports,
+  sportMeta,
+  sportMetas,
   events,
   activity,
   activities,
