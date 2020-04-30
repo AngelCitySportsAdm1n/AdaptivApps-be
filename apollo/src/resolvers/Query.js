@@ -82,6 +82,83 @@ const extendedProfiles = async (_, args, context) => {
   const extendedProfile = await context.prisma.extendedProfiles(args);
   return extendedProfile;
 };
+
+// --------------------------------------------------------------------- Mobility Status Query ---------------------------------------------------------------------
+
+/**
+ * @param {{ where: import('../generated/prisma-client').MobilityStatusWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const mobilityStatus = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.mobilityStatus: %O', currentUser);
+
+  // Finding an Mobility Status based on args specification
+  const mobilityStatus = await context.prisma.mobilityStatus(args.where);
+  return mobilityStatus;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').MobilityStatusWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const mobilityStatuses = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.mobilityStatuses: %O', currentUser);
+
+  // Finding a Mobility Status based on args specification
+  const mobilityStatus = await context.prisma.mobilityStatuses(args);
+  return mobilityStatus;
+};
+
+// --------------------------------------------------------------------- Military Branch Query ---------------------------------------------------------------------
+
+/**
+ * @param {{ where: import('../generated/prisma-client').MilitaryBranchWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const militaryBranch = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.militaryBranch: %O', currentUser);
+
+  // Finding a Military Branch based on args specification
+  const militaryBranch = await context.prisma.militaryBranch(args.where);
+  return militaryBranch;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').MilitaryBranchWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const militaryBranches = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.militaryBranches: %O', currentUser);
+
+  // Finding a militaryBranch based on args specification
+  const militaryBranch = await context.prisma.militaryBranches(args);
+  return militaryBranch;
+};
+
 // --------------------------------------------------------------------- Event Query ---------------------------------------------------------------------
 
 /**
@@ -246,7 +323,10 @@ module.exports = {
   profiles,
   extendedProfile,
   extendedProfiles,
-  event,
+  mobilityStatus,
+  mobilityStatuses,
+  militaryBranch,
+  militaryBranches,
   events,
   activity,
   activities,
