@@ -16,6 +16,12 @@
 # import Query.sportMeta from "generated/prisma.graphql"
 # import Query.sportMetas from "generated/prisma.graphql"
 
+# import Query.host from "generated/prisma.graphql"
+# import Query.hosts from "generated/prisma.graphql"
+
+# import Query.coach from "generated/prisma.graphql"
+# import Query.coaches from "generated/prisma.graphql"
+
 # import Query.event from "generated/prisma.graphql"
 # import Query.events from "generated/prisma.graphql"
 
