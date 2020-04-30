@@ -1,6 +1,9 @@
 # import Query.profile from "generated/prisma.graphql"
 # import Query.profiles from "generated/prisma.graphql"
 
+# import Query.extendedProfile from "generated/prisma.graphql"
+# import Query.extendedProfiles from "generated/prisma.graphql"
+
 # import Query.event from "generated/prisma.graphql"
 # import Query.events from "generated/prisma.graphql"
 

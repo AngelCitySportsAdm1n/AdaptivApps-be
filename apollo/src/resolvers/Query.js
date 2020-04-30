@@ -45,6 +45,43 @@ const profiles = async (_, args, context) => {
   return profile;
 };
 
+// --------------------------------------------------------------------- Extended Profile Query ---------------------------------------------------------------------
+
+/**
+ * @param {{ where: import('../generated/prisma-client').ExtendedProfileWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const extendedProfile = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.extendedProfile: %O', currentUser);
+
+  // Finding an extendedProfile based on args specification
+  const extendedProfile = await context.prisma.extendedProfile(args.where);
+  return extendedProfile;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').ExtendedProfileWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const extendedProfiles = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.extendedProfiles: %O', currentUser);
+
+  // Finding an extendedProfile based on args specification
+  const extendedProfile = await context.prisma.extendedProfiles(args);
+  return extendedProfile;
+};
 // --------------------------------------------------------------------- Event Query ---------------------------------------------------------------------
 
 /**
@@ -207,6 +244,8 @@ const chatRooms = async (_, args, context) => {
 module.exports = {
   profile,
   profiles,
+  extendedProfile,
+  extendedProfiles,
   event,
   events,
   activity,
