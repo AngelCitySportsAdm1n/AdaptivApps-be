@@ -8,7 +8,6 @@ type Profile @key(fields: "email") {
   displayName: String
   birthday: String
   bio: String
-  disability: String
   legal: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -24,7 +23,7 @@ type ExtendedProfile {
   private: Boolean @default(value: true)
   website: String
   orgName: String
-  disability: Disabilities @relation(name: "Disability")
+  disability: Disability @relation(name: "Disability")
   phoneNumber: String
   gender: String
   state: String
@@ -124,10 +123,10 @@ type Coach {
   profile: Profile!
 }
 
-type Disabilities {
+type Disability {
   id: ID! @id
   private: Boolean @default(value: true)
-  detailedDisabilities: DetailedDisabilities @relation(link: TABLE)
+  detailedDisabilities: DetailedDisability @relation(link: TABLE)
   ataxia: Boolean @default(value: false)
   hearingImpairment: Boolean @default(value: false)
   hypertonia: Boolean @default(value: false)
@@ -141,7 +140,7 @@ type Disabilities {
   none: Boolean @default(value: false)
 }
 
-type DetailedDisabilities {
+type DetailedDisability {
   id: ID! @id
   ALS: Boolean @default(value: false)
   amputation: Boolean @default(value: false)
