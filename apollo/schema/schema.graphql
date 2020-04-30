@@ -22,6 +22,9 @@
 # import Query.coach from "generated/prisma.graphql"
 # import Query.coaches from "generated/prisma.graphql"
 
+# import Query.disabilities from "generated/prisma.graphql"
+# import Query.disabilitieses from "generated/prisma.graphql"
+
 # import Query.event from "generated/prisma.graphql"
 # import Query.events from "generated/prisma.graphql"
 

@@ -311,6 +311,45 @@ const coaches = async (_, args, context) => {
   return coach;
 };
 
+// --------------------------------------------------------------------- Disabilities Query ---------------------------------------------------------------------
+
+/**
+ * @param {{ where: import('../generated/prisma-client').DisabilitiesWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const disabilities = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.disabilities: %O', currentUser);
+
+  // Finding a sport meta based on args specification
+  const disabilities = await context.prisma.disabilities(args.where);
+  return disabilities;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').DisabilitiesWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const disabilitieses = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.disabilitieses: %O', currentUser);
+
+  // Finding a sport metas based on args specification
+  const disabilities = await context.prisma.disabilitieses(args);
+  return disabilities;
+};
+
+
 
 // --------------------------------------------------------------------- Event Query ---------------------------------------------------------------------
 
@@ -488,6 +527,8 @@ module.exports = {
   hosts,
   coach,
   coaches,
+  disabilities,
+  disabilitieses,
   event,
   events,
   activity,
