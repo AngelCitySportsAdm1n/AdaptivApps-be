@@ -25,6 +25,9 @@
 # import Query.disabilities from "generated/prisma.graphql"
 # import Query.disabilitieses from "generated/prisma.graphql"
 
+# import Query.detailedDisabilities from "generated/prisma.graphql"
+# import Query.detailedDisabilitieses from "generated/prisma.graphql"
+
 # import Query.event from "generated/prisma.graphql"
 # import Query.events from "generated/prisma.graphql"
 

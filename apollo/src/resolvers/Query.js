@@ -60,7 +60,7 @@ const extendedProfile = async (_, args, context) => {
   }
   context.logger.debug('Query.extendedProfile: %O', currentUser);
 
-  // Finding an extendedProfile based on args specification
+  // Finding an extended profile based on args specification
   const extendedProfile = await context.prisma.extendedProfile(args.where);
   return extendedProfile;
 };
@@ -78,7 +78,7 @@ const extendedProfiles = async (_, args, context) => {
   }
   context.logger.debug('Query.extendedProfiles: %O', currentUser);
 
-  // Finding an extendedProfile based on args specification
+  // Finding extended profiles based on args specification
   const extendedProfile = await context.prisma.extendedProfiles(args);
   return extendedProfile;
 };
@@ -116,7 +116,7 @@ const mobilityStatuses = async (_, args, context) => {
   }
   context.logger.debug('Query.mobilityStatuses: %O', currentUser);
 
-  // Finding a Mobility Status based on args specification
+  // Finding Mobility Statuses based on args specification
   const mobilityStatus = await context.prisma.mobilityStatuses(args);
   return mobilityStatus;
 };
@@ -154,7 +154,7 @@ const militaryBranches = async (_, args, context) => {
   }
   context.logger.debug('Query.militaryBranches: %O', currentUser);
 
-  // Finding a militaryBranch based on args specification
+  // Finding military branches based on args specification
   const militaryBranch = await context.prisma.militaryBranches(args);
   return militaryBranch;
 };
@@ -192,7 +192,7 @@ const sports = async (_, args, context) => {
   }
   context.logger.debug('Query.sports: %O', currentUser);
 
-  // Finding a sport based on args specification
+  // Finding sports based on args specification
   const sport = await context.prisma.sports(args);
   return sport;
 };
@@ -212,7 +212,7 @@ const sportMeta = async (_, args, context) => {
   }
   context.logger.debug('Query.sportMeta: %O', currentUser);
 
-  // Finding a sport meta based on args specification
+  // Finding sport meta based on args specification
   const sportMeta = await context.prisma.sportMeta(args.where);
   return sportMeta;
 };
@@ -230,7 +230,7 @@ const sportMetas = async (_, args, context) => {
   }
   context.logger.debug('Query.sportMetas: %O', currentUser);
 
-  // Finding a sport metas based on args specification
+  // Finding sport metas based on args specification
   const sportMeta = await context.prisma.sportMetas(args);
   return sportMeta;
 };
@@ -250,7 +250,7 @@ const host = async (_, args, context) => {
   }
   context.logger.debug('Query.host: %O', currentUser);
 
-  // Finding a sport meta based on args specification
+  // Finding a host based on args specification
   const host = await context.prisma.host(args.where);
   return host;
 };
@@ -268,7 +268,7 @@ const hosts = async (_, args, context) => {
   }
   context.logger.debug('Query.hosts: %O', currentUser);
 
-  // Finding a sport metas based on args specification
+  // Finding hosts based on args specification
   const host = await context.prisma.hosts(args);
   return host;
 };
@@ -288,7 +288,7 @@ const coach = async (_, args, context) => {
   }
   context.logger.debug('Query.coach: %O', currentUser);
 
-  // Finding a sport meta based on args specification
+  // Finding a coach based on args specification
   const coach = await context.prisma.coach(args.where);
   return coach;
 };
@@ -306,7 +306,7 @@ const coaches = async (_, args, context) => {
   }
   context.logger.debug('Query.coaches: %O', currentUser);
 
-  // Finding a sport metas based on args specification
+  // Finding coaches based on args specification
   const coach = await context.prisma.coaches(args);
   return coach;
 };
@@ -326,7 +326,7 @@ const disabilities = async (_, args, context) => {
   }
   context.logger.debug('Query.disabilities: %O', currentUser);
 
-  // Finding a sport meta based on args specification
+  // Finding disabilities based on args specification
   const disabilities = await context.prisma.disabilities(args.where);
   return disabilities;
 };
@@ -344,11 +344,48 @@ const disabilitieses = async (_, args, context) => {
   }
   context.logger.debug('Query.disabilitieses: %O', currentUser);
 
-  // Finding a sport metas based on args specification
+  // Finding disabilities based on args specification
   const disabilities = await context.prisma.disabilitieses(args);
   return disabilities;
 };
 
+// --------------------------------------------------------------------- Detailed Disabilities Query ---------------------------------------------------------------------
+
+/**
+ * @param {{ where: import('../generated/prisma-client').DetailedDisabilitiesWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const detailedDisabilities = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.detailedDisabilities: %O', currentUser);
+
+  // Finding detailed disabilities based on args specification
+  const detailedDisabilities = await context.prisma.detailedDisabilities(args.where);
+  return detailedDisabilities;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').DetailedDisabilitiesWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const detailedDisabilitieses = async (_, args, context) => {
+  const currentUser = await context.user;
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Query.detailedDisabilitieses: %O', currentUser);
+
+  // Finding detailed disabilities based on args specification
+  const detailedDisabilities = await context.prisma.detailedDisabilitieses(args);
+  return detailedDisabilities;
+};
 
 
 // --------------------------------------------------------------------- Event Query ---------------------------------------------------------------------
@@ -529,6 +566,8 @@ module.exports = {
   coaches,
   disabilities,
   disabilitieses,
+  detailedDisabilities,
+  detailedDisabilitieses,
   event,
   events,
   activity,
