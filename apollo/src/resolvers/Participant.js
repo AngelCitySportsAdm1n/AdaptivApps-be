@@ -7,9 +7,13 @@ function role(parent, args, context) {
 function activity(parent, args, context) {
   return context.prisma.participant({ id: parent.id }).activity();
 }
+function event(parent, args, context) {
+  return context.prisma.participant({ id: parent.id }).event();
+}
 
 module.exports = {
   profile,
   role,
   activity,
+  event
 };
