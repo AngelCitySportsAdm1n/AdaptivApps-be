@@ -4,3 +4,8 @@ function participant(parent, args, context) {
 function sportMeta(parent, args, context) {
   return context.prisma.sport({ id: parent.id }).sportMeta();
 }
+
+module.exports = {
+  participant,
+  sportMeta,
+};
