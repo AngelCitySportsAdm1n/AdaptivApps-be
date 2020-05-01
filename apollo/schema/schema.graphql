@@ -21,13 +21,13 @@
 # import Mutation.updateExtendedProfile from "generated/prisma.graphql"
 # import Mutation.deleteExtendedProfile from "generated/prisma.graphql"
 
-# import Mutation.createDisabilities from "generated/prisma.graphql"
-# import Mutation.updateDisabilities from "generated/prisma.graphql"
-# import Mutation.deleteDisabilities from "generated/prisma.graphql"
+# import Mutation.createDisability from "generated/prisma.graphql"
+# import Mutation.updateDisability from "generated/prisma.graphql"
+# import Mutation.deleteDisability from "generated/prisma.graphql"
 
-# import Mutation.createDetailedDisabilities from "generated/prisma.graphql"
-# import Mutation.updateDetailedDisabilities from "generated/prisma.graphql"
-# import Mutation.deleteDetailedDisabilities from "generated/prisma.graphql"
+# import Mutation.createDetailedDisability from "generated/prisma.graphql"
+# import Mutation.updateDetailedDisability from "generated/prisma.graphql"
+# import Mutation.deleteDetailedDisability from "generated/prisma.graphql"
 
 # import Mutation.createMobilityStatus from "generated/prisma.graphql"
 # import Mutation.updateMobilityStatus from "generated/prisma.graphql"

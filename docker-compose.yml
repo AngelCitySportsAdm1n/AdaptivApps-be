@@ -8,8 +8,8 @@ services:
       context: ./apollo
       dockerfile: Dockerfile
     command: sh -c "yarn global add nodemon && nodemon -v && NODE_ENV=development nodemon -V -L src/index.js"
-    cpus: '0.25'
-    mem_limit: 250M
+    cpus: '0.5'
+    mem_limit: 2G
     volumes:
       - ./apollo/src:/app/src:delegated
       - ./apollo/schema:/app/schema:delegated
@@ -33,8 +33,8 @@ services:
   # The Prisma service
   prisma:
     image: prismagraphql/prisma:1.34
-    cpus: '0.25'
-    mem_limit: 250M
+    cpus: '0.5'
+    mem_limit: 2G
     ports:
       - '${PRISMA_LISTEN_PORT:-7000}:${PRISMA_LISTEN_PORT:-7000}'
     environment:
@@ -52,8 +52,8 @@ services:
   # The Postgres service
   postgres:
     image: postgres:10.3
-    cpus: '0.25'
-    mem_limit: 250M
+    cpus: '0.5'
+    mem_limit: 2G
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-prisma}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-prisma}
