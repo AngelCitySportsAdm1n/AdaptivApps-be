@@ -44,6 +44,42 @@
 # import Mutation.updateProfile from "generated/prisma.graphql"
 # import Mutation.deleteProfile from "generated/prisma.graphql"
 
+# import Mutation.createExtendedProfile from "generated/prisma.graphql"
+# import Mutation.updateExtendedProfile from "generated/prisma.graphql"
+# import Mutation.deleteExtendedProfile from "generated/prisma.graphql"
+
+# import Mutation.createDisability from "generated/prisma.graphql"
+# import Mutation.updateDisability from "generated/prisma.graphql"
+# import Mutation.deleteDisability from "generated/prisma.graphql"
+
+# import Mutation.createDetailedDisability from "generated/prisma.graphql"
+# import Mutation.updateDetailedDisability from "generated/prisma.graphql"
+# import Mutation.deleteDetailedDisability from "generated/prisma.graphql"
+
+# import Mutation.createMobilityStatus from "generated/prisma.graphql"
+# import Mutation.updateMobilityStatus from "generated/prisma.graphql"
+# import Mutation.deleteMobilityStatus from "generated/prisma.graphql"
+
+# import Mutation.createMilitaryBranch from "generated/prisma.graphql"
+# import Mutation.updateMilitaryBranch from "generated/prisma.graphql"
+# import Mutation.deleteMilitaryBranch from "generated/prisma.graphql"
+
+# import Mutation.createSport from "generated/prisma.graphql"
+# import Mutation.updateSport from "generated/prisma.graphql"
+# import Mutation.deleteSport from "generated/prisma.graphql"
+
+# import Mutation.createSportMeta from "generated/prisma.graphql"
+# import Mutation.updateSportMeta from "generated/prisma.graphql"
+# import Mutation.deleteSportMeta from "generated/prisma.graphql"
+
+# import Mutation.createHost from "generated/prisma.graphql"
+# import Mutation.updateHost from "generated/prisma.graphql"
+# import Mutation.deleteHost from "generated/prisma.graphql"
+
+# import Mutation.createCoach from "generated/prisma.graphql"
+# import Mutation.updateCoach from "generated/prisma.graphql"
+# import Mutation.deleteCoach from "generated/prisma.graphql"
+
 # import Mutation.createEvent from "generated/prisma.graphql"
 # import Mutation.updateEvent from "generated/prisma.graphql"
 # import Mutation.deleteEvent from "generated/prisma.graphql"
@@ -61,6 +97,7 @@
 # import Mutation.createChat from "generated/prisma.graphql"
 # import Mutation.updateChat from "generated/prisma.graphql"
 # import Mutation.deleteChat from "generated/prisma.graphql"
+
 # import Mutation.createChatRoom from "generated/prisma.graphql"
 # import Mutation.updateChatRoom from "generated/prisma.graphql"
 # import Mutation.deleteChatRoom from "generated/prisma.graphql"

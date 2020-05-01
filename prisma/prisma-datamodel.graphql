@@ -91,6 +91,7 @@ type Activity {
   details: String
   event: Event! @relation(name: "Activities")
   participants: [Participant]! @relation(name: "Participant", onDelete: CASCADE)
+  coaches: [Coach]! @relation(link: TABLE)
 }
 
 type Participant {
@@ -126,7 +127,7 @@ type Coach {
 type Disability {
   id: ID! @id
   private: Boolean @default(value: true)
-  detailedDisability: DetailedDisability @relation(link: TABLE)
+  detailedDisabilities: DetailedDisability @relation(link: TABLE)
   ataxia: Boolean @default(value: false)
   hearingImpairment: Boolean @default(value: false)
   hypertonia: Boolean @default(value: false)
