@@ -1,6 +1,33 @@
 # import Query.profile from "generated/prisma.graphql"
 # import Query.profiles from "generated/prisma.graphql"
 
+# import Query.extendedProfile from "generated/prisma.graphql"
+# import Query.extendedProfiles from "generated/prisma.graphql"
+
+# import Query.mobilityStatus from "generated/prisma.graphql"
+# import Query.mobilityStatuses from "generated/prisma.graphql"
+
+# import Query.militaryBranch from "generated/prisma.graphql"
+# import Query.militaryBranches from "generated/prisma.graphql"
+
+# import Query.sport from "generated/prisma.graphql"
+# import Query.sports from "generated/prisma.graphql"
+
+# import Query.sportMeta from "generated/prisma.graphql"
+# import Query.sportMetas from "generated/prisma.graphql"
+
+# import Query.host from "generated/prisma.graphql"
+# import Query.hosts from "generated/prisma.graphql"
+
+# import Query.coach from "generated/prisma.graphql"
+# import Query.coaches from "generated/prisma.graphql"
+
+# import Query.disability from "generated/prisma.graphql"
+# import Query.disabilities from "generated/prisma.graphql"
+
+# import Query.detailedDisability from "generated/prisma.graphql"
+# import Query.detailedDisabilities from "generated/prisma.graphql"
+
 # import Query.event from "generated/prisma.graphql"
 # import Query.events from "generated/prisma.graphql"
 
