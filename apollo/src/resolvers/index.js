@@ -14,6 +14,7 @@ const Participant = require('./Participant');
 const Chat = require('./Chat');
 const ChatRoom = require('./ChatRoom');
 const Subscription = require('./Subscription');
+const ExtendedProfile = require('./ExtendedProfile');
 
 const resolvers = {
   Query,
@@ -24,7 +25,8 @@ const resolvers = {
   Event,
   Participant,
   Chat,
-  ChatRoom
+  ChatRoom,
+  ExtendedProfile
 };
 
 module.exports = resolvers;
