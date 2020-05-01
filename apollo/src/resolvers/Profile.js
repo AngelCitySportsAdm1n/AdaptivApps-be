@@ -1,5 +1,4 @@
 function activities(parent, args, context) {
-  console.log(parent);
   return context.prisma.profile({ email: parent.email }).activities();
 }
 
