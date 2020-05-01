@@ -10,6 +10,8 @@ const Mutation = require('./Mutation');
 const Activity = require('./Activity');
 const Profile = require('./Profile');
 const Event = require('./Event');
+const Host = require('./Host');
+const Coach = require('./Coach');
 const Participant = require('./Participant');
 const Chat = require('./Chat');
 const ChatRoom = require('./ChatRoom');
@@ -22,9 +24,11 @@ const resolvers = {
   Activity,
   Profile,
   Event,
+  Host,
+  Coach,
   Participant,
   Chat,
-  ChatRoom
+  ChatRoom,
 };
 
 module.exports = resolvers;
