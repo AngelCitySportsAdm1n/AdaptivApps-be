@@ -5,63 +5,141 @@ type Profile @key(fields: "email") {
   private: Boolean @default(value: true)
   firstName: String
   lastName: String
+  phoneNumber: String
   displayName: String
-  birthday: String
+  state: String
+  city: String
   bio: String
-  legal: String
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
+  legal: Boolean @default(value: false)
   events: [Participant]! @relation(name: "Event")
   activities: [Participant]! @relation(name: "Profile")
   extProfile: ExtendedProfile @relation(name: "ExtendedProfile")
+  demographicProfile: DemographicProfile @relation(name: "DemographicProfile")
   chats: [Chat] @relation(name: "SentMessages", onDelete: CASCADE)
   receivedChats: [Chat] @relation(name: "ReceivedMessages", onDelete: CASCADE)
   chatRooms: [ChatRoom] @relation(name: "ChatRooms", onDelete: CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
+
 type ExtendedProfile {
   id: ID! @id
   private: Boolean @default(value: true)
   website: String
   orgName: String
   disability: Disability @relation(name: "Disability")
-  phoneNumber: String
   gender: String
-  state: String
-  city: String
-  adaptivSportsParticipantion: Boolean @default(value: false)
-  acsParticipantion: Boolean @default(value: false)
+  birthday: String
   eC1Name: String
   eC1Relation: String
   eC1Phone: String
-  eC2Name: String
-  eC2Relation: String
-  eC2Phone: String
-  militaryBranch: MilitaryBranch @relation(name: "Branch")
-  mobility: MobilityStatus @relation(name: "Mobility")
+  mobilityStatus: String
 }
-type MobilityStatus {
+
+type DemographicProfile {
   id: ID! @id
   private: Boolean @default(value: true)
-  walkIndependently: Boolean @default(value: false)
-  assistiveDevice: Boolean @default(value: false)
-  manualWheelchair: Boolean @default(value: false)
-  powerChair: Boolean @default(value: false)
+  adaptivSportsParticipation: Boolean @default(value: false)
+  acsParticipation: Boolean @default(value: false)
+  sportsParticipation: AdaptivSportsOptions
+    @relation(name: "AdaptivSportOptions")
+  notParticipating: String
+  angelCityParticipation: String
+  angelCityGameYears: String
+  veteranStatus: Boolean
+  militaryBranch: String
+  yearsServed: String
+  ethnicity: String
+  householdIncome: String
+  employment: Boolean
+  favProAthletes: String
+  favCelebs: String
+  becomeAthleteMentor: Boolean
+  athleteMentorHelp: Boolean
+  athleteMentorSport: AdaptivSportsOptions @relation(name: "AdaptivSportList")
+  acsDiscovery: String
+  acsOrgSpecificDiscovery: String
+  amplaEmail: Boolean
+  hangerClinic: Boolean
+  challengeMagazine: Boolean
 }
-type MilitaryBranch {
+
+type AdaptivSportsOptions {
   id: ID! @id
   private: Boolean @default(value: true)
-  army: Boolean @default(value: false)
-  navy: Boolean @default(value: false)
-  marineCorps: Boolean @default(value: false)
-  coastGuard: Boolean @default(value: false)
-  foreignMilitary: Boolean @default(value: false)
+  airRifle: Boolean @default(value: false)
+  alpineSkiing: Boolean @default(value: false)
+  archery: Boolean @default(value: false)
+  badminton: Boolean @default(value: false)
+  baseball: Boolean @default(value: false)
+  beepBaseball: Boolean @default(value: false)
+  biathlon: Boolean @default(value: false)
+  blindHockey: Boolean @default(value: false)
+  boccia: Boolean @default(value: false)
+  bowling: Boolean @default(value: false)
+  boxing: Boolean @default(value: false)
+  canoe: Boolean @default(value: false)
+  cheerleading: Boolean @default(value: false)
+  crossFit: Boolean @default(value: false)
+  crossCountrySkiing: Boolean @default(value: false)
+  curling: Boolean @default(value: false)
+  cycling: Boolean @default(value: false)
+  equestrian: Boolean @default(value: false)
+  esports: Boolean @default(value: false)
+  fishing: Boolean @default(value: false)
+  goalball: Boolean @default(value: false)
+  golf: Boolean @default(value: false)
+  hiking: Boolean @default(value: false)
+  hunting: Boolean @default(value: false)
+  judo: Boolean @default(value: false)
+  juJitsu: Boolean @default(value: false)
+  lacrosse: Boolean @default(value: false)
+  mixedMartialArts: Boolean @default(value: false)
+  motorsportsMotorcross: Boolean @default(value: false)
+  mountainBiking: Boolean @default(value: false)
+  powerlifting: Boolean @default(value: false)
+  rafting: Boolean @default(value: false)
+  rockClimbing: Boolean @default(value: false)
+  rowing: Boolean @default(value: false)
+  sailing: Boolean @default(value: false)
+  scuba: Boolean @default(value: false)
+  shooting: Boolean @default(value: false)
+  skateboarding: Boolean @default(value: false)
+  snowboarding: Boolean @default(value: false)
+  sledHockey: Boolean @default(value: false)
+  soccerBlindSoccerFiveaside: Boolean @default(value: false)
+  soccerAmputeeCrutchSoccer: Boolean @default(value: false)
+  soccerPowerSoccer: Boolean @default(value: false)
+  soccerCPSevenaside: Boolean @default(value: false)
+  standupWheelchairPaddling: Boolean @default(value: false)
+  swimming: Boolean @default(value: false)
+  surfing: Boolean @default(value: false)
+  tableTennis: Boolean @default(value: false)
+  taekwondo: Boolean @default(value: false)
+  taiChi: Boolean @default(value: false)
+  trackField: Boolean @default(value: false)
+  triathlon: Boolean @default(value: false)
+  volleyballBeachVolleyball: Boolean @default(value: false)
+  volleyballSittingVolleyball: Boolean @default(value: false)
+  waterSkiing: Boolean @default(value: false)
+  wheelchairSkateboarding: Boolean @default(value: false)
+  wheelchairBasketball: Boolean @default(value: false)
+  wheelchairCurling: Boolean @default(value: false)
+  wheelchairFencing: Boolean @default(value: false)
+  wheelchairFootball: Boolean @default(value: false)
+  wheelchairSoftball: Boolean @default(value: false)
+  wheelchairRugby: Boolean @default(value: false)
+  wheelchairTennis: Boolean @default(value: false)
+  wrestling: Boolean @default(value: false)
+  yoga: Boolean @default(value: false)
+  other: Boolean @default(value: false)
 }
 
 type Event {
   id: ID! @id
   type: String!
   sportType: String!
-  tags: String!
+  tags: [String]! @scalarList(strategy: RELATION)
   title: String!
   host: Host! @relation(link: TABLE)
   coaches: [Coach]! @relation(link: TABLE)
