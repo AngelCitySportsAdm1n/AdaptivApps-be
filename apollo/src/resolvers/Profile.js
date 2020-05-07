@@ -8,6 +8,9 @@ function events(parent, args, context) {
 function extProfile(parent, args, context) {
   return context.prisma.profile({ email: parent.email }).extProfile();
 }
+function demographicProfile(parent, args, context) {
+  return context.prisma.profile({ email: parent.email }).demographicProfile();
+}
 
 function chats(parent, args, context) {
   return context.prisma.profile({ email: parent.email }).chats();
@@ -25,6 +28,7 @@ module.exports = {
   activities,
   events,
   extProfile,
+  demographicProfile,
   chats,
   receivedChats,
   chatRooms,

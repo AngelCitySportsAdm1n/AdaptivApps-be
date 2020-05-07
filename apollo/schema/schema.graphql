@@ -4,14 +4,11 @@
 # import Query.extendedProfile from "generated/prisma.graphql"
 # import Query.extendedProfiles from "generated/prisma.graphql"
 
-# import Query.mobilityStatus from "generated/prisma.graphql"
-# import Query.mobilityStatuses from "generated/prisma.graphql"
+# import Query.demographicProfile from "generated/prisma.graphql"
+# import Query.demographicProfiles from "generated/prisma.graphql"
 
-# import Query.militaryBranch from "generated/prisma.graphql"
-# import Query.militaryBranches from "generated/prisma.graphql"
-
-# import Query.sport from "generated/prisma.graphql"
-# import Query.sports from "generated/prisma.graphql"
+# import Query.adaptivSportsOptions from "generated/prisma.graphql"
+# import Query.adaptivSportsOptionses from "generated/prisma.graphql"
 
 # import Query.sportMeta from "generated/prisma.graphql"
 # import Query.sportMetas from "generated/prisma.graphql"
@@ -64,13 +61,13 @@
 # import Mutation.updateMilitaryBranch from "generated/prisma.graphql"
 # import Mutation.deleteMilitaryBranch from "generated/prisma.graphql"
 
-# import Mutation.createSport from "generated/prisma.graphql"
-# import Mutation.updateSport from "generated/prisma.graphql"
-# import Mutation.deleteSport from "generated/prisma.graphql"
+# import Mutation.createDemographicProfile from "generated/prisma.graphql"
+# import Mutation.updateDemographicProfile from "generated/prisma.graphql"
+# import Mutation.deleteDemographicProfile from "generated/prisma.graphql"
 
-# import Mutation.createSportMeta from "generated/prisma.graphql"
-# import Mutation.updateSportMeta from "generated/prisma.graphql"
-# import Mutation.deleteSportMeta from "generated/prisma.graphql"
+# import Mutation.createAdaptivSportsOptions from "generated/prisma.graphql"
+# import Mutation.updateAdaptivSportsOptions from "generated/prisma.graphql"
+# import Mutation.deleteAdaptivSportsOptions from "generated/prisma.graphql"
 
 # import Mutation.createHost from "generated/prisma.graphql"
 # import Mutation.updateHost from "generated/prisma.graphql"
