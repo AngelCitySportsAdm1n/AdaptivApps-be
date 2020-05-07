@@ -179,18 +179,6 @@ type Participant {
   profile: Profile! @relation(name: "Profile")
   role: Role! @relation(name: "Role", onDelete: CASCADE)
 }
-type Sport {
-  id: ID! @id
-  participant: Participant! @relation(name: "Athlete")
-  sport: SportMeta @relation(name: "Sport")
-  response: String
-}
-type SportMeta {
-  id: ID! @id
-  name: String!
-  question: String!
-  options: [String]! @scalarList(strategy: RELATION)
-}
 
 type Host {
   id: ID! @id
