@@ -169,7 +169,7 @@ type Activity {
   details: String
   event: Event! @relation(name: "Activities")
   participants: [Participant]! @relation(name: "Participant", onDelete: CASCADE)
-  coaches: [Coach]! @relation(link: TABLE)
+  coaches: String!
 }
 
 type Participant {
