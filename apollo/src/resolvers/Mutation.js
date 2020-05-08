@@ -103,6 +103,25 @@ const updateEvent = async (_, args, context) => {
 };
 
 /**
+ * @param {{ where: import('../generated/prisma-client').EventWhereUniqueInput, create: import('../generated/prisma-client').EventCreateInput, update: import('../generated/prisma-client').EventUpdateInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const upsertEvent = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = await context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.upsertEvent: %O', currentUser);
+  // Upserts an participant with args passed in
+  const event = await context.prisma.upsertEvent(args);
+
+  return event;
+};
+
+/**
  * @param {{ where: import('../generated/prisma-client').EventWhereUniqueInput }} args
  * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
  * @returns { Promise }
@@ -156,6 +175,25 @@ const updateActivity = async (_, args, context) => {
   context.logger.debug('Mutation.updateActivity: %O', currentUser);
   // Updates an activity with args passed in
   const activity = await context.prisma.updateActivity(args);
+
+  return activity;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').ActivityWhereUniqueInput, create: import('../generated/prisma-client').ActivityCreateInput, update: import('../generated/prisma-client').ActivityUpdateInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const upsertActivity = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = await context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.upsertActivity: %O', currentUser);
+  // Upserts an participant with args passed in
+  const activity = await context.prisma.upsertActivity(args);
 
   return activity;
 };
@@ -375,9 +413,11 @@ module.exports = {
   deleteProfile,
   createEvent,
   updateEvent,
+  upsertEvent,
   deleteEvent,
   createActivity,
   updateActivity,
+  upsertActivity,
   deleteActivity,
   createParticipant,
   updateParticipant,
