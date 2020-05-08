@@ -139,12 +139,12 @@ type Event {
   id: ID! @id
   type: String!
   sportType: String!
-  tags: [String]! @scalarList(strategy: RELATION)
+  tags: String!
   title: String!
-  host: Host! @relation(link: TABLE)
-  coaches: [Coach]! @relation(link: TABLE)
+  host: String!
+  coaches: String
   speakers: String
-  date: [String]! @scalarList(strategy: RELATION)
+  date: String!
   startTime: String
   endTime: String
   location: String!
