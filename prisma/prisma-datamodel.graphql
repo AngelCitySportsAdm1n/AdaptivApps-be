@@ -11,7 +11,7 @@ type Profile @key(fields: "email") {
   city: String
   bio: String
   legal: Boolean @default(value: false)
-  events: [Participant]! @relation(name: "Event")
+  events: [Participant]! @relation(name: "EventProfile")
   activities: [Participant]! @relation(name: "Profile")
   extProfile: ExtendedProfile @relation(name: "ExtendedProfile")
   demographicProfile: DemographicProfile @relation(name: "DemographicProfile")
@@ -161,7 +161,7 @@ type Activity {
   name: String!
   type: String!
   sportType: String!
-  date: [String]! @scalarList(strategy: RELATION)
+  date: String!
   location: String!
   link: String
   startTime: String!
@@ -174,10 +174,11 @@ type Activity {
 
 type Participant {
   id: ID! @id
-  event: Event! @relation(name: "Attendees")
+  event: Event @relation(name: "Attendees")
   activity: Activity @relation(name: "Participant")
-  profile: Profile! @relation(name: "Profile")
-  role: Role! @relation(name: "Role", onDelete: CASCADE)
+  profile: Profile @relation(name: "Profile")
+  eventProfile: Profile @relation(name: "EventProfile")
+  role: Role @relation(name: "Role", onDelete: CASCADE)
 }
 
 type Host {

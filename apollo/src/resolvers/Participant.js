@@ -1,6 +1,9 @@
 function profile(parent, args, context) {
   return context.prisma.participant({ id: parent.id }).profile();
 }
+function eventProfile(parent, args, context) {
+  return context.prisma.participant({ id: parent.id }).eventProfile();
+}
 function role(parent, args, context) {
   return context.prisma.participant({ id: parent.id }).role();
 }
@@ -13,6 +16,7 @@ function event(parent, args, context) {
 
 module.exports = {
   profile,
+  eventProfile,
   role,
   activity,
   event
