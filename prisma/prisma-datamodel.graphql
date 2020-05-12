@@ -176,7 +176,7 @@ type Participant {
   id: ID! @id
   event: Event @relation(name: "Attendees")
   activity: Activity @relation(name: "Participant")
-  profile: Profile @relation(name: "Profile")
+  activityProfile: Profile @relation(name: "Profile")
   eventProfile: Profile @relation(name: "EventProfile")
   role: Role @relation(name: "Role", onDelete: CASCADE)
 }
