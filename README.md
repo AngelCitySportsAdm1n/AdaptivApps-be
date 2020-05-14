@@ -1,5 +1,7 @@
 _For Windows 10 Pro Users: run 'docker-compose up --build'_
 
+##
+
 # Prismatopia
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/13f8d8a1198ebf1d8644/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/AdaptivApps-be/maintainability)
