@@ -22,9 +22,6 @@
 # import Query.disability from "generated/prisma.graphql"
 # import Query.disabilities from "generated/prisma.graphql"
 
-# import Query.detailedDisability from "generated/prisma.graphql"
-# import Query.detailedDisabilities from "generated/prisma.graphql"
-
 # import Query.event from "generated/prisma.graphql"
 # import Query.events from "generated/prisma.graphql"
 
@@ -48,10 +45,6 @@
 # import Mutation.createDisability from "generated/prisma.graphql"
 # import Mutation.updateDisability from "generated/prisma.graphql"
 # import Mutation.deleteDisability from "generated/prisma.graphql"
-
-# import Mutation.createDetailedDisability from "generated/prisma.graphql"
-# import Mutation.updateDetailedDisability from "generated/prisma.graphql"
-# import Mutation.deleteDetailedDisability from "generated/prisma.graphql"
 
 # import Mutation.createMobilityStatus from "generated/prisma.graphql"
 # import Mutation.updateMobilityStatus from "generated/prisma.graphql"

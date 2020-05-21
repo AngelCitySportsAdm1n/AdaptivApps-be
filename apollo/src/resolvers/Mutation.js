@@ -314,68 +314,6 @@ const deleteDisability = async (_, args, context) => {
   return disability;
 };
 
-// --------------------------------------------------------------------- DetailedDisability Mutations ---------------------------------------------------------------------
-
-/**
- * @param {{ data: import('../generated/prisma-client').DetailedDisabilityCreateInput }} args
- * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
- * @returns { Promise }
- */
-const createDetailedDisability = async (_, args, context) => {
-  // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
-  if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated');
-  }
-  context.logger.debug('Mutation.createDetailedDisability: %O', currentUser);
-  // Creates a DetailedDisability Table based on args data
-  const detailedDisability = context.prisma.createDetailedDisability(args.data);
-
-  return detailedDisability;
-};
-/**
- * @param {{ data: import('../generated/prisma-client').DetailedDisabilityUpdateInput, where: import('../generated/prisma-client').DetailedDisabilityWhereUniqueInput }} args
- * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
- * @returns { Promise }
- */
-const updateDetailedDisability = async (_, args, context) => {
-  // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
-  if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
-  }
-  context.logger.debug('Mutation.updateDetailedDisability: %O', currentUser);
-  // Updates a DetailedDisability with args passed in
-  const detailedDisability = await context.prisma.updateDetailedDisability(
-    args
-  );
-
-  return detailedDisability;
-};
-
-/**
- * @param {{ where: import('../generated/prisma-client').DetailedDisabilityWhereUniqueInput }} args
- * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
- * @returns { Promise }
- */
-const deleteDetailedDisability = async (_, args, context) => {
-  // This next line ensures user needs to be logged in, else return error
-  const currentUser = await context.user;
-  if (typeof currentUser === context.user) {
-    context.logger.error('API called by unauthenticated user.');
-    throw new AuthenticationError('Must be authenticated.');
-  }
-  context.logger.debug('Mutation.deleteDetailedDisability: %O', currentUser);
-  // Deletes a DetailedDisability table with args passed in
-  const detailedDisability = await context.prisma.deleteDetailedDisability(
-    args.where
-  );
-
-  return detailedDisability;
-};
-
 // --------------------------------------------------------------------- Event Mutations ---------------------------------------------------------------------
 
 /**
@@ -847,9 +785,6 @@ module.exports = {
   createDisability,
   updateDisability,
   deleteDisability,
-  createDetailedDisability,
-  updateDetailedDisability,
-  deleteDetailedDisability,
   createEvent,
   updateEvent,
   upsertEvent,

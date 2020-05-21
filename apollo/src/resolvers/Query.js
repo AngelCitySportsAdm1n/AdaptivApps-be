@@ -237,46 +237,6 @@ const disabilities = async (_, args, context) => {
   return disability;
 };
 
-// --------------------------------------------------------------------- Detailed Disabilities Query ---------------------------------------------------------------------
-
-/**
- * @param {{ where: import('../generated/prisma-client').DetailedDisabilityWhereUniqueInput }} args
- * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
- * @returns { Promise }
- */
-const detailedDisability = async (_, args, context) => {
-  const currentUser = await context.user;
-  if (typeof currentUser === 'undefined') {
-    context.logger.error('API called by unauthenticated user');
-    throw new AuthenticationError('Must be authenticated');
-  }
-  context.logger.debug('Query.detailedDisability: %O', currentUser);
-
-  // Finding detailed disability based on args specification
-  const detailedDisability = await context.prisma.detailedDisability(
-    args.where
-  );
-  return detailedDisability;
-};
-
-/**
- * @param {{ where: import('../generated/prisma-client').DetailedDisabilityWhereInput }} args
- * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
- * @returns { Promise }
- */
-const detailedDisabilities = async (_, args, context) => {
-  const currentUser = await context.user;
-  if (typeof currentUser === 'undefined') {
-    context.logger.error('API called by unauthenticated user');
-    throw new AuthenticationError('Must be authenticated');
-  }
-  context.logger.debug('Query.detailedDisabilities: %O', currentUser);
-
-  // Finding detailed disabilities based on args specification
-  const detailedDisability = await context.prisma.detailedDisabilities(args);
-  return detailedDisability;
-};
-
 // --------------------------------------------------------------------- Adaptiv Sports Options Query ---------------------------------------------------------------------
 
 /**
@@ -491,8 +451,6 @@ module.exports = {
   coaches,
   disability,
   disabilities,
-  detailedDisability,
-  detailedDisabilities,
   adaptivSportsOptions,
   adaptivSportsOptionses,
   event,

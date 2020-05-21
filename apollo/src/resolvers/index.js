@@ -13,7 +13,6 @@ const Event = require('./Event');
 const Host = require('./Host');
 const Coach = require('./Coach');
 const DemographicProfile = require('./DemographicProfile');
-const Disability = require('./Disability');
 const Participant = require('./Participant');
 const Chat = require('./Chat');
 const ChatRoom = require('./ChatRoom');
@@ -25,7 +24,6 @@ const resolvers = {
   Subscription,
   Activity,
   Profile,
-  Disability,
   Event,
   Host,
   DemographicProfile,

@@ -39,29 +39,29 @@ type ExtendedProfile {
 type DemographicProfile {
   id: ID! @id
   private: Boolean @default(value: true)
-  adaptivSportsParticipation: Boolean @default(value: false)
-  acsParticipation: Boolean @default(value: false)
+  adaptivSportsParticipation: String
+  acsParticipation: String
   sportsParticipation: AdaptivSportsOptions
     @relation(name: "AdaptivSportOptions")
   notParticipating: String
   angelCityParticipation: String
   angelCityGameYears: String
-  veteranStatus: Boolean
+  veteranStatus: String
   militaryBranch: String
   yearsServed: String
   ethnicity: String
   householdIncome: String
-  employment: Boolean
+  employment: String
   favProAthletes: String
   favCelebs: String
-  becomeAthleteMentor: Boolean
-  athleteMentorHelp: Boolean
+  becomeAthleteMentor: String
+  athleteMentorHelp: String
   athleteMentorSport: AdaptivSportsOptions @relation(name: "AdaptivSportList")
   acsDiscovery: String
   acsOrgSpecificDiscovery: String
-  amplaEmail: Boolean
-  hangerClinic: Boolean
-  challengeMagazine: Boolean
+  amplaEmail: String
+  hangerClinic: String
+  challengeMagazine: String
 }
 
 type AdaptivSportsOptions {
@@ -195,48 +195,8 @@ type Coach {
 type Disability {
   id: ID! @id
   private: Boolean @default(value: true)
-  detailedDisabilities: DetailedDisability @relation(link: TABLE)
-  ataxia: Boolean @default(value: false)
-  hearingImpairment: Boolean @default(value: false)
-  hypertonia: Boolean @default(value: false)
-  impairedMusclePower: Boolean @default(value: false)
-  impairedPassiveRange: Boolean @default(value: false)
-  intellectualImpairment: Boolean @default(value: false)
-  legLengthDiff: Boolean @default(value: false)
-  limbDeficiency: Boolean @default(value: false)
-  shortStature: Boolean @default(value: false)
-  visionImpairment: Boolean @default(value: false)
-  none: Boolean @default(value: false)
-}
-
-type DetailedDisability {
-  id: ID! @id
-  ALS: Boolean @default(value: false)
-  amputation: Boolean @default(value: false)
-  arthogryposis: Boolean @default(value: false)
-  brachialPlexusInjury: Boolean @default(value: false)
-  caudaEquinaSyndrome: Boolean @default(value: false)
-  cerebralPalsy: Boolean @default(value: false)
-  arthritis: Boolean @default(value: false)
-  charcotMarieTooth: Boolean @default(value: false)
-  dropFoot: Boolean @default(value: false)
-  dwarfism: Boolean @default(value: false)
-  ehlersDanlosSyndrome: Boolean @default(value: false)
-  fibromyalgia: Boolean @default(value: false)
-  guillainBarreSyndrome: Boolean @default(value: false)
-  multipleSclerosis: Boolean @default(value: false)
-  muscularDystrophy: Boolean @default(value: false)
-  osteogenesisImperfecta: Boolean @default(value: false)
-  osteoporosis: Boolean @default(value: false)
-  parkinsons: Boolean @default(value: false)
-  polio: Boolean @default(value: false)
-  praderWilliSyndrome: Boolean @default(value: false)
-  spinaBifida: Boolean @default(value: false)
-  paraplegia: Boolean @default(value: false)
-  quadraplegia: Boolean @default(value: false)
-  tbi: Boolean @default(value: false)
-  other: Boolean @default(value: false)
-  none: Boolean @default(value: false)
+  physicalDisability: String
+  detailedDisabilities: String
 }
 
 type Chat {
