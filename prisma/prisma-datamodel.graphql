@@ -56,7 +56,7 @@ type DemographicProfile {
   favCelebs: String
   becomeAthleteMentor: String
   athleteMentorHelp: String
-  athleteMentorSport: AdaptivSportsOptions @relation(name: "AdaptivSportList")
+  athleteMentorSport: String
   acsDiscovery: String
   acsOrgSpecificDiscovery: String
   amplaEmail: String
