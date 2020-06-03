@@ -18,6 +18,8 @@ const Chat = require('./Chat');
 const ChatRoom = require('./ChatRoom');
 const Subscription = require('./Subscription');
 const ExtendedProfile = require('./ExtendedProfile');
+const Announcement = require('./Announcement');
+const Notification = require('./Notification');
 const resolvers = {
   Query,
   Mutation,
@@ -32,6 +34,8 @@ const resolvers = {
   Chat,
   ChatRoom,
   ExtendedProfile,
+  Announcement,
+  Notification,
 };
 
 module.exports = resolvers;

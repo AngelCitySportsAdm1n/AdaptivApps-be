@@ -16,5 +16,5 @@ module.exports = {
   activities,
   attendees,
   host,
-  coaches
+  coaches,
 };
