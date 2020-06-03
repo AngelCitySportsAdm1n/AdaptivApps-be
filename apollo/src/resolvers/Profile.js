@@ -24,6 +24,14 @@ function chatRooms(parent, args, context) {
   return context.prisma.profile({ email: parent.email }).chatRooms();
 }
 
+function announcements(parent, args, context) {
+  return context.prisma.profile({ email: parent.email }).announcements();
+}
+
+function notifications(parent, args, context) {
+  return context.prisma.profile({ email: parent.email }).notifications();
+}
+
 module.exports = {
   activities,
   events,
@@ -32,4 +40,6 @@ module.exports = {
   chats,
   receivedChats,
   chatRooms,
+  announcements,
+  notifications,
 };

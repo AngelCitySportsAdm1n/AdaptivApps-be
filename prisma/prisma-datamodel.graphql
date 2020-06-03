@@ -18,6 +18,9 @@ type Profile @key(fields: "email") {
   chats: [Chat] @relation(name: "SentMessages", onDelete: CASCADE)
   receivedChats: [Chat] @relation(name: "ReceivedMessages", onDelete: CASCADE)
   chatRooms: [ChatRoom] @relation(name: "ChatRooms", onDelete: CASCADE)
+  announcements: [Announcement] @relation(name: "Announcements")
+  notifications: [Notification]!
+    @relation(name: "Notifications", onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -205,12 +208,31 @@ type Chat {
   message: String!
   createdAt: DateTime! @createdAt
   room: ChatRoom @relation(name: "Room")
+  notification: [Notification]! @relation(name: "ChatNotification")
 }
 
 type ChatRoom {
   id: ID! @id
   participants: [Profile]! @relation(name: "ChatRooms")
   chats: [Chat] @relation(name: "Room", onDelete: CASCADE)
+}
+
+type Announcement {
+  id: ID! @id
+  participants: [Profile]! @relation(name: "Announcements")
+  title: String!
+  message: String!
+  createdAt: DateTime! @createdAt
+  isAnnouncementRoom: Boolean!
+  notification: [Notification]! @relation(name: "AnnouncementNotification")
+}
+
+type Notification {
+  id: ID! @id
+  label: String!
+  profile: [Profile]! @relation(name: "Notifications")
+  announcement: Announcement @relation(name: "AnnouncementNotification")
+  chat: Chat @relation(name: "ChatNotification")
 }
 
 enum Role {
