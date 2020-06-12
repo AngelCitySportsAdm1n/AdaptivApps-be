@@ -202,6 +202,11 @@ type Disability {
   physicalDisability: String
   detailedDisabilities: String
 }
+type File {
+  fileName: String!
+  mimeType: String!
+  encoding: String!
+}
 
 type Chat {
   id: ID! @id
