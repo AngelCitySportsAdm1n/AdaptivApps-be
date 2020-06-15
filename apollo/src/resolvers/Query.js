@@ -479,6 +479,46 @@ const notifications = async (_, args, context) => {
   return notifications
 }
 
+// --------------------------------------------------------------------- Tag Query ---------------------------------------------------------------------
+
+/**
+ * @param {{ where: import('../generated/prisma-client').TagWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const tag = async (_, args, context) => {
+  const currentUser = await context.user
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user')
+    throw new AuthenticationError('Must be authenticated')
+  }
+  context.logger.debug('Query.tag: %O', currentUser)
+
+  // Finding the profile based on args specification
+  const tag = await context.prisma.tag(args.where)
+
+  return tag
+}
+
+/**
+ * @param {{ where: import('../generated/prisma-client').TagWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const tags = async (_, args, context) => {
+  const currentUser = await context.user
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user')
+    throw new AuthenticationError('Must be authenticated')
+  }
+  context.logger.debug('Query.tags: %O', currentUser)
+
+  // Returns all profiles
+  const tags = await context.prisma.tags(args)
+
+  return tags
+}
+
 module.exports = {
   profile,
   profiles,
@@ -503,5 +543,7 @@ module.exports = {
   chats,
   chatRooms,
   announcements,
-  notifications
+  notifications,
+  tag,
+  tags
 }
