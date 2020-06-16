@@ -7,7 +7,6 @@ type Profile @key(fields: "email, userName") {
   firstName: String
   lastName: String
   phoneNumber: String
-  displayName: String
   state: String
   city: String
   bio: String
