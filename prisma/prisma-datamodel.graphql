@@ -7,7 +7,6 @@ type Profile @key(fields: "email, userName") {
   firstName: String
   lastName: String
   phoneNumber: String
-  displayName: String
   state: String
   city: String
   bio: String
@@ -143,7 +142,7 @@ type Event {
   id: ID! @id
   type: String!
   sportType: String!
-  tags: String!
+  tags: String
   title: String!
   host: String!
   coaches: String
@@ -175,6 +174,7 @@ type Activity {
   event: Event! @relation(name: "Activities")
   participants: [Participant]! @relation(name: "Participant", onDelete: CASCADE)
   coaches: String!
+  tags: String
 }
 
 type Participant {
@@ -234,6 +234,11 @@ type Notification {
   profile: [Profile]! @relation(name: "Notifications")
   announcement: Announcement @relation(name: "AnnouncementNotification")
   chat: Chat @relation(name: "ChatNotification")
+}
+
+type Tag {
+  id: ID! @id
+  name: String! @unique
 }
 
 enum Role {
