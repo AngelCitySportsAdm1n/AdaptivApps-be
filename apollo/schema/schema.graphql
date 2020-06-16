@@ -32,6 +32,7 @@
 # import Query.participants from "generated/prisma.graphql"
 
 # import Query.chats from "generated/prisma.graphql"
+# import Query.chatRoom from "generated/prisma.graphql"
 # import Query.chatRooms from "generated/prisma.graphql"
 
 # import Query.tag from "generated/prisma.graphql"
