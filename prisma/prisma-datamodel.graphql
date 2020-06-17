@@ -2,6 +2,8 @@ type Profile @key(fields: "email, userName") {
   id: ID! @id
   email: String! @unique
   userName: String @unique
+  profilePicture: String
+  profileBanner: String
   type: String
   private: Boolean @default(value: true)
   firstName: String

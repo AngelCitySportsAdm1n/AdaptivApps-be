@@ -1,6 +1,6 @@
 function sportsParticipation(parent, args, context) {
   return context.prisma
-    .demographicProfile({ email: parent.email })
+    .demographicProfile({ id: parent.id })
     .sportsParticipation();
 }
 
