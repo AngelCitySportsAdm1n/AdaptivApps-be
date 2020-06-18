@@ -13,6 +13,9 @@ type Profile @key(fields: "email, userName") {
   city: String
   bio: String
   legal: String
+  instagram: String
+  facebook: String
+  twitter: String
   events: [Participant]! @relation(name: "EventProfile")
   activities: [Participant]! @relation(name: "Profile")
   extProfile: ExtendedProfile @relation(name: "ExtendedProfile")
@@ -25,6 +28,8 @@ type Profile @key(fields: "email, userName") {
     @relation(name: "Notifications", onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+  newsFeedPost: [FeedPost]! @relation(name: "NewsFeedPost")
+  newsFeedComment: [FeedComment]! @relation(name: "NewsFeedComment")
 }
 
 type ExtendedProfile {
@@ -241,6 +246,25 @@ type Notification {
 type Tag {
   id: ID! @id
   name: String! @unique
+}
+
+type FeedPost {
+  id: ID! @id
+  body: String!
+  imgUrl: String
+  comments: [FeedComment]! 
+  postedBy: Profile! @relation(name: "NewsFeedPost")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type FeedComment {
+  id: ID! @id
+  body: String!
+  feed: FeedPost!
+  postedBy: Profile! @relation(name: "NewsFeedComment")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 enum Role {
