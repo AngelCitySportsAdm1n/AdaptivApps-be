@@ -30,6 +30,7 @@ type Profile @key(fields: "email, userName") {
   updatedAt: DateTime! @updatedAt
   newsFeedPost: [FeedPost]! @relation(name: "NewsFeedPost")
   newsFeedComment: [FeedComment]! @relation(name: "NewsFeedComment")
+  newsFeedLikes: [FeedLike]! @relation(name: "NewsFeedLike")
 }
 
 type ExtendedProfile {
@@ -253,6 +254,7 @@ type FeedPost {
   body: String!
   imgUrl: String
   comments: [FeedComment]! 
+  likes: [FeedLike]!
   postedBy: Profile! @relation(name: "NewsFeedPost")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -265,6 +267,12 @@ type FeedComment {
   postedBy: Profile! @relation(name: "NewsFeedComment")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+}
+
+type FeedLike {
+  id: ID! @id
+  post: FeedPost!
+  likedBy: Profile! @relation(name: "NewsFeedLike")
 }
 
 enum Role {
