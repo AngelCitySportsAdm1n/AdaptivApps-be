@@ -556,9 +556,9 @@ const feedPost = async (_, args, context) => {
   context.logger.debug('Query.FeedPost: %O', currentUser)
 
   // Finding the profile based on args specification
-  const FeedPost = await context.prisma.feedPost(args.where)
+  const feedPost = await context.prisma.feedPost(args.where)
 
-  return FeedPost
+  return feedPost
 }
 
 /**
@@ -575,9 +575,9 @@ const feedPosts = async (_, args, context) => {
   context.logger.debug('Query.FeedPosts: %O', currentUser)
 
   // Returns all profiles
-  const FeedPosts = await context.prisma.feedPosts(args)
+  const feedPosts = await context.prisma.feedPosts(args)
 
-  return FeedPosts
+  return feedPosts
 }
 
 /**
@@ -594,9 +594,9 @@ const feedComment = async (_, args, context) => {
   context.logger.debug('Query.FeedComment: %O', currentUser)
 
   // Finding the profile based on args specification
-  const FeedComment = await context.prisma.feedComment(args.where)
+  const feedComment = await context.prisma.feedComment(args.where)
 
-  return FeedComment
+  return feedComment
 }
 
 /**
@@ -613,9 +613,47 @@ const feedComments = async (_, args, context) => {
   context.logger.debug('Query.FeedComments: %O', currentUser)
 
   // Returns all profiles
-  const FeedComments = await context.prisma.feedComments(args)
+  const feedComments = await context.prisma.feedComments(args)
 
-  return FeedComments
+  return feedComments
+}
+
+/**
+ * @param {{ where: import('../generated/prisma-client').FeedLikeWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const feedLike = async (_, args, context) => {
+  const currentUser = await context.user
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user')
+    throw new AuthenticationError('Must be authenticated')
+  }
+  context.logger.debug('Query.FeedLike: %O', currentUser)
+
+  // Finding the profile based on args specification
+  const feedLike = await context.prisma.feedLike(args.where)
+
+  return feedLike
+}
+
+/**
+ * @param {{ where: import('../generated/prisma-client').FeedLikeWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const feedLikes = async (_, args, context) => {
+  const currentUser = await context.user
+  if (typeof currentUser === 'undefined') {
+    context.logger.error('API called by unauthenticated user')
+    throw new AuthenticationError('Must be authenticated')
+  }
+  context.logger.debug('Query.FeedLikes: %O', currentUser)
+
+  // Returns all profiles
+  const feedLikes = await context.prisma.feedLikes(args)
+
+  return feedLikes
 }
 
 module.exports = {
@@ -649,5 +687,7 @@ module.exports = {
   feedPost,
   feedPosts,
   feedComment,
-  feedComments
+  feedComments,
+  feedLike,
+  feedLikes
 }

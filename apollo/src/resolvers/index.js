@@ -20,6 +20,10 @@ const Subscription = require('./Subscription');
 const ExtendedProfile = require('./ExtendedProfile');
 const Announcement = require('./Announcement');
 const Notification = require('./Notification');
+const FeedPost = require('./FeedPost');
+const FeedComment = require('./FeedComment');
+const FeedLike = require('./FeedLikes');
+
 const resolvers = {
   Query,
   Mutation,
@@ -36,6 +40,9 @@ const resolvers = {
   ExtendedProfile,
   Announcement,
   Notification,
+  FeedPost,
+  FeedComment,
+  FeedLike
 };
 
 module.exports = resolvers;

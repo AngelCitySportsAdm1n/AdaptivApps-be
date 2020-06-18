@@ -1,4 +1,4 @@
-function postedBy(parent, args, context) {
+function postedBy(parent, __, context) {
     return context.prisma.feedPost({ id: parent.id }).postedBy()
 };
 

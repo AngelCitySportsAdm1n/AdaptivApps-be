@@ -131,6 +131,8 @@
 # import Query.feedPosts from "generated/prisma.graphql"
 # import Query.feedComment from "generated/prisma.graphql"
 # import Query.feedComments from "generated/prisma.graphql"
+# import Query.feedLike from "generated/prisma.graphql"
+# import Query.feedLikes from "generated/prisma.graphql"
 # import Mutation.createFeedPost from "generated/prisma.graphql"
 # import Mutation.updateFeedPost from "generated/prisma.graphql"
 # import Mutation.deleteFeedPost from "generated/prisma.graphql"
