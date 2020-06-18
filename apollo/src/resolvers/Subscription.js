@@ -84,6 +84,39 @@ function newProfileSubscribe(parent, args, context, info) {
   });
 }
 
+// --------------------------------------------------------------------- Newsfeed Post Subscription ---------------------------------------------------------------------
+/**
+ * @param {{ where: import('../generated/prisma-client').FeedPostSubscriptionWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+function newFeedPostSubscribe(parent, args, context, info) {
+  if (typeof context.user === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Subscription.feedPost: %O', context.user);
+  return context.prisma.$subscribe.feedPost({
+    mutation_in: ['CREATED', 'UPDATED', 'DELETED'],
+  });
+}
+
+/**
+ * @param {{ where: import('../generated/prisma-client').FeedCommentSubscriptionWhereInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+function newFeedCommentSubscribe(parent, args, context, info) {
+  if (typeof context.user === 'undefined') {
+    context.logger.error('API called by unauthenticated user');
+    throw new AuthenticationError('Must be authenticated');
+  }
+  context.logger.debug('Subscription.feedComment: %O', context.user);
+  return context.prisma.$subscribe.feedComment({
+    mutation_in: ['CREATED', 'UPDATED', 'DELETED'],
+  });
+}
+
 // CHAT SUBSCRIPTION RETURN
 const chat = {
   subscribe: newChatSubscribe,
@@ -124,10 +157,28 @@ const profile = {
   },
 };
 
+// NEWSFEED POST SUBSCRIPTION RETURN
+const feedPost = {
+  subscribe: newFeedPostSubscribe,
+  resolve: payload => {
+    return payload;
+  }
+}
+
+// NEWSFEED COMMENT SUBSCRIPTION RETURN
+const feedComment = {
+  subscribe: newFeedCommentSubscribe,
+  resolve: payload => {
+    return payload;
+  }
+}
+
 module.exports = {
   chat,
   chatRoom,
   announcement,
   notification,
   profile,
+  feedPost,
+  feedComment
 };

@@ -908,7 +908,6 @@ const createTag = async (_, args, context) => {
   context.logger.debug('Mutation.createTag: %O', currentUser);
   // Creates a chat room
   const tag = await context.prisma.createTag(args.data);
-
   return tag;
 };
 
@@ -927,8 +926,157 @@ const deleteTag = async (_, args, context) => {
   context.logger.debug('Mutation.deleteTag: %O', currentUser);
   // Deletes a notification
   const tag = await context.prisma.deleteTag(args.where);
-
   return tag;
+};
+
+// --------------------------------------------------------------------- Newsfeed Posts, Comments, and Likes Mutations ---------------------------------------------------------------------
+/**
+ * @param {{ data: import('../generated/prisma-client').FeedPostCreateInput! }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const createFeedPost = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = await context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.createFeedPost: %O', currentUser);
+  // Creates a chat room
+  const post = await context.prisma.createFeedPost(args.data);
+
+  return post;
+};
+
+/**
+ * @param {{ data: import('../generated/prisma-client').FeedPostUpdateInput, where: import('../generated/prisma-client').FeedPostWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const updateFeedPost = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = await context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.updateFeedPost: %O', currentUser);
+  // Updates a chat room
+  const post = await context.prisma.updateFeedPost(args);
+
+  return post;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').FeedPostWhereUniqueInput! }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const deleteFeedPost = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = await context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.deleteFeedPost: %O', currentUser);
+  // Deletes a notification
+  const post = await context.prisma.deleteFeedPost(args.where);
+  return post;
+};
+
+/**
+ * @param {{ data: import('../generated/prisma-client').FeedCommentCreateInput! }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const createFeedComment = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = await context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.createFeedComment: %O', currentUser);
+  // Creates a chat room
+  const comment = await context.prisma.createFeedComment(args.data);
+
+  return comment;
+};
+
+/**
+ * @param {{ data: import('../generated/prisma-client').FeedCommentUpdateInput, where: import('../generated/prisma-client').FeedCommentWhereUniqueInput }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const updateFeedComment = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = await context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.updateFeedComment: %O', currentUser);
+  // Updates a chat room
+  const comment = await context.prisma.updateFeedComment(args);
+
+  return comment;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').FeedCommentWhereUniqueInput! }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const deleteFeedComment = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = await context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.deleteFeedComment: %O', currentUser);
+  // Deletes a notification
+  const comment = await context.prisma.deleteFeedComment(args.where);
+  return comment;
+};
+
+/**
+ * @param {{ data: import('../generated/prisma-client').FeedLikeCreateInput! }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const createFeedLike = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = await context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.createFeedLike: %O', currentUser);
+  // Creates a chat room
+  const like = await context.prisma.createFeedLike(args.data);
+
+  return like;
+};
+
+/**
+ * @param {{ where: import('../generated/prisma-client').FeedLikeWhereUniqueInput! }} args
+ * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
+ * @returns { Promise }
+ */
+const deleteFeedLike = async (_, args, context) => {
+  // This next line ensures user needs to be logged in, else return error
+  const currentUser = await context.user;
+  if (typeof currentUser === context.user) {
+    context.logger.error('API called by unauthenticated user.');
+    throw new AuthenticationError('Must be authenticated.');
+  }
+  context.logger.debug('Mutation.deleteFeedLike: %O', currentUser);
+  // Deletes a notification
+  const like = await context.prisma.deleteFeedLike(args.where);
+  return like;
 };
 
 module.exports = {
@@ -978,5 +1126,13 @@ module.exports = {
   updateNotification,
   deleteNotification,
   createTag,
-  deleteTag
+  deleteTag,
+  createFeedPost,
+  updateFeedPost,
+  deleteFeedPost,
+  createFeedComment,
+  updateFeedComment,
+  deleteFeedComment,
+  createFeedLike,
+  deleteFeedLike
 };

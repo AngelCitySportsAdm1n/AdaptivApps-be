@@ -32,6 +32,18 @@ function notifications(parent, args, context) {
   return context.prisma.profile({ email: parent.email }).notifications();
 }
 
+function newsFeedPost(parent, args, context) {
+  return context.prisma.profile({ email: parent.email }).newsFeedPost();
+}
+
+function newsFeedComment(parent, args, context) {
+  return context.prisma.profile({ email: parent.email }).newsFeedComment();
+}
+
+function newsFeedLikes(parent, args, context) {
+  return context.prisma.profile({ email: parent.email }).newsFeedLikes();
+}
+
 module.exports = {
   activities,
   events,
@@ -42,4 +54,7 @@ module.exports = {
   chatRooms,
   announcements,
   notifications,
+  newsFeedPost,
+  newsFeedComment,
+  newsFeedLikes
 };
