@@ -14,6 +14,7 @@ type Profile @key(fields: "email, userName") {
   state: String
   city: String
   country: String
+  postalCode: String
   bio: String
   legal: String
   instagram: String
