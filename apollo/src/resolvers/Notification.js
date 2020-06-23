@@ -6,12 +6,12 @@ function announcement (parent, __, context) {
   return context.prisma.notification({ id: parent.id }).announcement()
 }
 
-function chat (parent, __, context) {
-  return context.prisma.notification({ id: parent.id }).chat()
+function chatroom (parent, __, context) {
+  return context.prisma.notification({ id: parent.id }).chatroom()
 }
 
 module.exports = {
   profile,
   announcement,
-  chat
+  chatroom
 }
