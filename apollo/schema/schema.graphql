@@ -7,9 +7,6 @@
 # import Query.demographicProfile from "generated/prisma.graphql"
 # import Query.demographicProfiles from "generated/prisma.graphql"
 
-# import Query.adaptivSportsOptions from "generated/prisma.graphql"
-# import Query.adaptivSportsOptionses from "generated/prisma.graphql"
-
 # import Query.sportMeta from "generated/prisma.graphql"
 # import Query.sportMetas from "generated/prisma.graphql"
 
@@ -64,10 +61,6 @@
 # import Mutation.createDemographicProfile from "generated/prisma.graphql"
 # import Mutation.updateDemographicProfile from "generated/prisma.graphql"
 # import Mutation.deleteDemographicProfile from "generated/prisma.graphql"
-
-# import Mutation.createAdaptivSportsOptions from "generated/prisma.graphql"
-# import Mutation.updateAdaptivSportsOptions from "generated/prisma.graphql"
-# import Mutation.deleteAdaptivSportsOptions from "generated/prisma.graphql"
 
 # import Mutation.createHost from "generated/prisma.graphql"
 # import Mutation.updateHost from "generated/prisma.graphql"

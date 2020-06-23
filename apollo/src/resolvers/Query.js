@@ -237,48 +237,6 @@ const disabilities = async (_, args, context) => {
   return disability;
 };
 
-// --------------------------------------------------------------------- Adaptiv Sports Options Query ---------------------------------------------------------------------
-
-/**
- * @param {{ where: import('../generated/prisma-client').AdaptivSportsOptionsWhereUniqueInput }} args
- * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
- * @returns { Promise }
- */
-const adaptivSportsOptions = async (_, args, context) => {
-  const currentUser = await context.user;
-  if (typeof currentUser === 'undefined') {
-    context.logger.error('API called by unauthenticated user');
-    throw new AuthenticationError('Must be authenticated');
-  }
-  context.logger.debug('Query.adaptivSportsOptions: %O', currentUser);
-
-  // Finding detailed disability based on args specification
-  const adaptivSportsOptions = await context.prisma.adaptivSportsOptions(
-    args.where
-  );
-  return adaptivSportsOptions;
-};
-
-/**
- * @param {{ where: import('../generated/prisma-client').AdaptivSportsOptionsWhereInput }} args
- * @param {{ prisma: import('../generated/prisma-client').Prisma, user: any, logger: import('winston') }} context
- * @returns { Promise }
- */
-const adaptivSportsOptionses = async (_, args, context) => {
-  const currentUser = await context.user;
-  if (typeof currentUser === 'undefined') {
-    context.logger.error('API called by unauthenticated user');
-    throw new AuthenticationError('Must be authenticated');
-  }
-  context.logger.debug('Query.adaptivSportsOptionses: %O', currentUser);
-
-  // Finding detailed disabilities based on args specification
-  const adaptivSportsOptions = await context.prisma.adaptivSportsOptionses(
-    args
-  );
-  return adaptivSportsOptions;
-};
-
 // --------------------------------------------------------------------- Event Query ---------------------------------------------------------------------
 
 /**
@@ -669,8 +627,6 @@ module.exports = {
   coaches,
   disability,
   disabilities,
-  adaptivSportsOptions,
-  adaptivSportsOptionses,
   event,
   events,
   activity,
