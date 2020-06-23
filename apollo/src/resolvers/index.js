@@ -12,7 +12,6 @@ const Profile = require('./Profile');
 const Event = require('./Event');
 const Host = require('./Host');
 const Coach = require('./Coach');
-const DemographicProfile = require('./DemographicProfile');
 const Participant = require('./Participant');
 const Chat = require('./Chat');
 const ChatRoom = require('./ChatRoom');
@@ -32,7 +31,6 @@ const resolvers = {
   Profile,
   Event,
   Host,
-  DemographicProfile,
   Coach,
   Participant,
   Chat,
