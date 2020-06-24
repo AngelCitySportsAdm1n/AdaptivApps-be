@@ -20,6 +20,8 @@ type Profile @key(fields: "email, userName") {
   instagram: String
   facebook: String
   twitter: String
+  eulaAgreement: Boolean
+  tosAgreement: Boolean
   events: [Participant]! @relation(name: "EventProfile")
   activities: [Participant]! @relation(name: "Profile")
   extProfile: ExtendedProfile @relation(name: "ExtendedProfile")
