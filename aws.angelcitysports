@@ -1,5 +1,6 @@
 ApplicationName=angelcitysports
-ApplicationDomainNamespace=angelcitiesevents.com
+EnvironmentName=production
+ApplicationDomainNamespace=app.angelcityalliance.org
 
 ApolloServicePort=8000
 PrismaServicePort=8000
