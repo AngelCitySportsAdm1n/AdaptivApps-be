@@ -66,7 +66,7 @@ type DemographicProfile {
   videoGameFamiliarity: String
   additionalInfo: String
   waiverSignature: String
-  isMinor: String
+  isMinor: Boolean @default(value: false)
   guardianSignature: String
   minorName: String
   veteranStatus: String
