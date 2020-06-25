@@ -20,6 +20,8 @@ type Profile @key(fields: "email, userName") {
   instagram: String
   facebook: String
   twitter: String
+  eulaAgreement: Boolean
+  tosAgreement: Boolean
   events: [Participant]! @relation(name: "EventProfile")
   activities: [Participant]! @relation(name: "Profile")
   extProfile: ExtendedProfile @relation(name: "ExtendedProfile")
@@ -157,13 +159,16 @@ type Chat {
   message: String!
   createdAt: DateTime! @createdAt
   room: ChatRoom @relation(name: "Room")
-  notification: [Notification]! @relation(name: "ChatNotification")
 }
 
 type ChatRoom {
   id: ID! @id
   participants: [Profile]! @relation(name: "ChatRooms")
   chats: [Chat] @relation(name: "Room", onDelete: CASCADE)
+  notifications: [Notification!] @relation(name: "ChatNotification")
+  senderEmail: String!
+  displayForSender: Boolean @default(value: true)
+  displayForReceiver: Boolean @default(value: true)
 }
 
 type Announcement {
@@ -173,15 +178,15 @@ type Announcement {
   message: String!
   createdAt: DateTime! @createdAt
   isAnnouncementRoom: Boolean!
-  notification: [Notification]! @relation(name: "AnnouncementNotification")
+  notification: [Notification!] @relation(name: "AnnouncementNotification")
 }
 
 type Notification {
   id: ID! @id
-  label: String!
+  label: String
   profile: [Profile]! @relation(name: "Notifications")
   announcement: Announcement @relation(name: "AnnouncementNotification")
-  chat: Chat @relation(name: "ChatNotification")
+  chatroom: ChatRoom @relation(name: "ChatNotification")
 }
 
 type Tag {
@@ -193,7 +198,7 @@ type FeedPost {
   id: ID! @id
   body: String!
   imgUrl: String
-  comments: [FeedComment]! 
+  comments: [FeedComment]!
   likes: [FeedLike]!
   postedBy: Profile! @relation(name: "NewsFeedPost")
   createdAt: DateTime! @createdAt

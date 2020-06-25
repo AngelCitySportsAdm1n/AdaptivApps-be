@@ -1,10 +1,10 @@
-AWSTemplateFormatVersion: "2010-09-09"
+AWSTemplateFormatVersion: '2010-09-09'
 Description: Environment specific AWS resources
 
 Parameters:
   ApplicationName:
     Type: String
-    Description: The name of the application 
+    Description: The name of the application
     AllowedPattern: ^[a-z0-9\-]*$
 
   EnvironmentName:
@@ -15,10 +15,10 @@ Parameters:
   ApplicationDomainNamespace:
     Type: String
     Description: The DNS domain namespace for the application (e.g. mycoolapplication.com)
-    AllowedPattern: ^[a-z0-9\-]*\.[a-z0-9\-]*$
+    # AllowedPattern: ^[a-z0-9\-]*\.[a-z0-9\-]*$
 
 Conditions:
-  IsProductionEnvironment: !Equals [ !Ref EnvironmentName, production ]
+  IsProductionEnvironment: !Equals [!Ref EnvironmentName, production]
 
 Resources:
   PublicLoadBalancerSG:
@@ -26,15 +26,14 @@ Resources:
     Properties:
       GroupDescription: Security Group for the load balancer
       VpcId:
-        Fn::ImportValue:
-            !Sub ${ApplicationName}-VPCID
+        Fn::ImportValue: !Sub ${ApplicationName}-VPCID
       SecurityGroupIngress:
         - CidrIp: 0.0.0.0/0
-          IpProtocol: "tcp"
+          IpProtocol: 'tcp'
           FromPort: 80
           ToPort: 80
         - CidrIp: 0.0.0.0/0
-          IpProtocol: "tcp"
+          IpProtocol: 'tcp'
           FromPort: 443
           ToPort: 443
 
@@ -44,16 +43,14 @@ Resources:
       Type: application
       Scheme: internet-facing
       LoadBalancerAttributes:
-      - Key: idle_timeout.timeout_seconds
-        Value: '30'
+        - Key: idle_timeout.timeout_seconds
+          Value: '30'
       Subnets:
-        - Fn::ImportValue:
-            !Sub ${ApplicationName}-PublicSubnet01
-        - Fn::ImportValue:
-            !Sub ${ApplicationName}-PublicSubnet02
+        - Fn::ImportValue: !Sub ${ApplicationName}-PublicSubnet01
+        - Fn::ImportValue: !Sub ${ApplicationName}-PublicSubnet02
       SecurityGroups:
         - !Ref PublicLoadBalancerSG
-      Tags: 
+      Tags:
         - Key: Name
           Value: !Sub ${ApplicationName}-${EnvironmentName}-prisma
 
@@ -63,19 +60,17 @@ Resources:
       Type: application
       Scheme: internet-facing
       LoadBalancerAttributes:
-      - Key: idle_timeout.timeout_seconds
-        Value: '30'
+        - Key: idle_timeout.timeout_seconds
+          Value: '30'
       Subnets:
-        - Fn::ImportValue:
-            !Sub ${ApplicationName}-PublicSubnet01
-        - Fn::ImportValue:
-            !Sub ${ApplicationName}-PublicSubnet02
+        - Fn::ImportValue: !Sub ${ApplicationName}-PublicSubnet01
+        - Fn::ImportValue: !Sub ${ApplicationName}-PublicSubnet02
       SecurityGroups:
         - !Ref PublicLoadBalancerSG
-      Tags: 
+      Tags:
         - Key: Name
           Value: !Sub ${ApplicationName}-${EnvironmentName}-apollo
-  
+
   PrismaTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
@@ -88,13 +83,12 @@ Resources:
       Protocol: HTTP
       UnhealthyThresholdCount: 2
       VpcId:
-        Fn::ImportValue:
-            !Sub ${ApplicationName}-VPCID
+        Fn::ImportValue: !Sub ${ApplicationName}-VPCID
       TargetType: 'ip'
       TargetGroupAttributes:
         - Key: deregistration_delay.timeout_seconds
           Value: '10'
-      Tags: 
+      Tags:
         - Key: Name
           Value: !Sub ${ApplicationName}-${EnvironmentName}-prisma
 
@@ -110,13 +104,12 @@ Resources:
       Protocol: HTTP
       UnhealthyThresholdCount: 2
       VpcId:
-        Fn::ImportValue:
-            !Sub ${ApplicationName}-VPCID
+        Fn::ImportValue: !Sub ${ApplicationName}-VPCID
       TargetType: 'ip'
       TargetGroupAttributes:
         - Key: deregistration_delay.timeout_seconds
           Value: '10'
-      Tags: 
+      Tags:
         - Key: Name
           Value: !Sub ${ApplicationName}-${EnvironmentName}-apollo
 
@@ -157,8 +150,7 @@ Resources:
     Properties:
       Certificates:
         - CertificateArn:
-            Fn::ImportValue:
-              !Sub ${ApplicationName}-${EnvironmentName}-Certificate
+            Fn::ImportValue: !Sub ${ApplicationName}-${EnvironmentName}-Certificate
       DefaultActions:
         - TargetGroupArn: !Ref 'PrismaTargetGroup'
           Type: 'forward'
@@ -171,8 +163,7 @@ Resources:
     Properties:
       Certificates:
         - CertificateArn:
-            Fn::ImportValue:
-              !Sub ${ApplicationName}-${EnvironmentName}-Certificate
+            Fn::ImportValue: !Sub ${ApplicationName}-${EnvironmentName}-Certificate
       DefaultActions:
         - TargetGroupArn: !Ref 'ApolloTargetGroup'
           Type: 'forward'
@@ -185,32 +176,40 @@ Resources:
     Properties:
       Comment: !Sub Apollo API A record for the ${EnvironmentName} environment of ${ApplicationName}
       HostedZoneId:
-        Fn::ImportValue:
-            !Sub ${ApplicationName}-${EnvironmentName}-HostedZone
+        Fn::ImportValue: !Sub ${ApplicationName}-${EnvironmentName}-HostedZone
       # Environment A records are added to a subdomain, production records are on the application domain
-      Name: !If [IsProductionEnvironment, !Sub "apollo.${ApplicationDomainNamespace}", !Sub "apollo.${EnvironmentName}.${ApplicationDomainNamespace}"]
+      Name:
+        !If [
+          IsProductionEnvironment,
+          !Sub 'apollo.${ApplicationDomainNamespace}',
+          !Sub 'apollo.${EnvironmentName}.${ApplicationDomainNamespace}',
+        ]
       Type: A
       AliasTarget:
         DNSName: !GetAtt ApolloLoadBalancer.DNSName
         HostedZoneId: !GetAtt ApolloLoadBalancer.CanonicalHostedZoneID
-  
+
   ARecordPrismaPublicAPI:
     Type: AWS::Route53::RecordSet
     Properties:
       Comment: !Sub Prisma API A record for the ${EnvironmentName} environment of ${ApplicationName}
       HostedZoneId:
-        Fn::ImportValue:
-            !Sub ${ApplicationName}-${EnvironmentName}-HostedZone
+        Fn::ImportValue: !Sub ${ApplicationName}-${EnvironmentName}-HostedZone
       # Environment A records are added to a subdomain, production records are on the application domain
-      Name: !If [IsProductionEnvironment, !Sub "prisma.${ApplicationDomainNamespace}", !Sub "prisma.${EnvironmentName}.${ApplicationDomainNamespace}"]
+      Name:
+        !If [
+          IsProductionEnvironment,
+          !Sub 'prisma.${ApplicationDomainNamespace}',
+          !Sub 'prisma.${EnvironmentName}.${ApplicationDomainNamespace}',
+        ]
       Type: A
       AliasTarget:
         DNSName: !GetAtt PrismaLoadBalancer.DNSName
         HostedZoneId: !GetAtt PrismaLoadBalancer.CanonicalHostedZoneID
 
   ECSCluster:
-    Type: "AWS::ECS::Cluster"
-    Properties:      
+    Type: 'AWS::ECS::Cluster'
+    Properties:
       ClusterName: !Sub ${ApplicationName}-${EnvironmentName}
 
 Outputs:
