@@ -14,11 +14,14 @@ type Profile @key(fields: "email, userName") {
   state: String
   city: String
   country: String
+  postalCode: String
   bio: String
   legal: String
   instagram: String
   facebook: String
   twitter: String
+  eulaAgreement: Boolean
+  tosAgreement: Boolean
   events: [Participant]! @relation(name: "EventProfile")
   activities: [Participant]! @relation(name: "Profile")
   extProfile: ExtendedProfile @relation(name: "ExtendedProfile")
@@ -66,6 +69,7 @@ type DemographicProfile {
   additionalInfo: String
   waiverSignature: String
   isMinor: String
+  guardianSignature: String
   minorName: String
   veteranStatus: String
   militaryBranch: String
