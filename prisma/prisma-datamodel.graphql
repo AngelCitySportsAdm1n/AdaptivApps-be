@@ -162,6 +162,9 @@ type ChatRoom {
   participants: [Profile]! @relation(name: "ChatRooms")
   chats: [Chat] @relation(name: "Room", onDelete: CASCADE)
   notifications: [Notification!] @relation(name: "ChatNotification")
+  senderEmail: String!
+  displayForSender: Boolean @default(value: true)
+  displayForReceiver: Boolean @default(value: true)
 }
 
 type Announcement {
