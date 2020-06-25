@@ -69,6 +69,7 @@ type DemographicProfile {
   additionalInfo: String
   waiverSignature: String
   isMinor: String
+  guardianSignature: String
   minorName: String
   veteranStatus: String
   militaryBranch: String
