@@ -65,7 +65,10 @@ type DemographicProfile {
   virtualRide: String
   virtualRidePlatforms: String
   xBoxGamePass: String
-  videoGameFamiliarity: String
+  gameFamiliarityMinecraft: String
+  gameFamiliarityFortnite: String
+  gameFamiliarityCallofDuty: String
+  gameFamiliarityRocketLeague: String
   additionalInfo: String
   waiverSignature: String
   isMinor: Boolean @default(value: false)
