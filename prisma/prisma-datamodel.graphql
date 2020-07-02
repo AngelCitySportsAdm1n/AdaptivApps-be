@@ -199,7 +199,7 @@ type FeedPost {
   body: String!
   imgUrl: String
   comments: [FeedComment]!
-  likes: [FeedLike]!
+  likes: [FeedLike]! @relation(name: "Likes", onDelete: CASCADE)
   postedBy: Profile! @relation(name: "NewsFeedPost")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -216,7 +216,7 @@ type FeedComment {
 
 type FeedLike {
   id: ID! @id
-  post: FeedPost!
+  post: FeedPost! @relation(name: "Likes")
   likedBy: Profile! @relation(name: "NewsFeedLike")
 }
 
