@@ -203,6 +203,7 @@ type FeedPost {
   postedBy: Profile! @relation(name: "NewsFeedPost")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+  pinnedPost: Boolean @default(value: false)
 }
 
 type FeedComment {
