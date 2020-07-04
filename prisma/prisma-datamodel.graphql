@@ -210,7 +210,7 @@ type FeedComment {
   id: ID! @id
   body: String!
   feed: FeedPost! @relation(name: "Comments")
-  postedBy: Profile! @relation(name: "NewsFeedComment")
+  postedBy: Profile @relation(name: "NewsFeedComment")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
