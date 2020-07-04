@@ -261,6 +261,12 @@ const createEvent = async (_, args, context) => {
     context.logger.error('Api called by unauthenticated user.');
     throw new AuthenticationError('Must be authenticated.');
   }
+  if (!currentUser.groups.includes('Admin')) {
+    context.logger.error('API must be called by an Admin');
+    throw new AuthenticationError(
+      'You must be an Admin to access this functionality'
+    );
+  }
   context.logger.debug('Mutation.createEvent: %O', currentUser);
   // Creates an event based on args data
   const event = context.prisma.createEvent(args.data);
@@ -279,6 +285,12 @@ const updateEvent = async (_, args, context) => {
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user.');
     throw new AuthenticationError('Must be authenticated.');
+  }
+  if (!currentUser.groups.includes('Admin')) {
+    context.logger.error('API must be called by an Admin');
+    throw new AuthenticationError(
+      'You must be an Admin to access this functionality'
+    );
   }
   context.logger.debug('Mutation.updateEvent: %O', currentUser);
   // Updates an event with args passed in
@@ -299,6 +311,12 @@ const upsertEvent = async (_, args, context) => {
     context.logger.error('API called by unauthenticated user.');
     throw new AuthenticationError('Must be authenticated.');
   }
+  if (!currentUser.groups.includes('Admin')) {
+    context.logger.error('API must be called by an Admin');
+    throw new AuthenticationError(
+      'You must be an Admin to access this functionality'
+    );
+  }
   context.logger.debug('Mutation.upsertEvent: %O', currentUser);
   // Upserts an participant with args passed in
   const event = await context.prisma.upsertEvent(args);
@@ -317,6 +335,12 @@ const deleteEvent = async (_, args, context) => {
   if (typeof currentUser === 'undefined') {
     context.logger.error('API called by unauthenticated user.');
     throw new AuthenticationError('Must be authenticated.');
+  }
+  if (!currentUser.groups.includes('Admin')) {
+    context.logger.error('API must be called by an Admin');
+    throw new AuthenticationError(
+      'You must be an Admin to access this functionality'
+    );
   }
   context.logger.debug('Mutation.deleteEvent: %O', currentUser);
   // Deletes an Event with args passed in
@@ -1065,5 +1089,5 @@ module.exports = {
   updateFeedComment,
   deleteFeedComment,
   createFeedLike,
-  deleteFeedLike
+  deleteFeedLike,
 };
